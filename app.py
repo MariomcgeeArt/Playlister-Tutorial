@@ -36,6 +36,12 @@ def playlists_index():
     return render_template('playlists_index.html', playlists=playlists.find())
 
 
+@app.route('/playlists/<playlist_id>/delete', methods=['POST'])
+def playlists_delete(playlist_id):
+    """Delete one playlist."""
+    playlists.delete_one({'_id': ObjectId(playlist_id)})
+    return redirect(url_for('playlists_index'))
+
 @app.route('/playlists/new')
 def playlists_new():
     """Create a new playlist."""
